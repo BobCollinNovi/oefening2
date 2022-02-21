@@ -27,14 +27,14 @@ public class Oefening2 {
                 if (q.elementAt(j).equals("+") || q.elementAt(j).equals("-") ||
                         q.elementAt(j).equals("*") || q.elementAt(j).equals("/")) {
                     String[] inputStr = new String[]{q.elementAt(j - 1), q.elementAt(j), q.elementAt(j + 1)};
-                    int newInt = trySolveSubExpression(inputStr);
-                    if (newInt != 0) {
+                    String newInt = trySolveSubExpression(inputStr);
+                    if (!newInt.equals("Error")) {
                         int k =0;
                         while (k < 5) {
                             q.remove(j - 2);
                             k++;
                         }
-                        q.add(j -2, Integer.toString(newInt));
+                        q.add(j -2, newInt);
                     }
                 }
             }
@@ -43,18 +43,18 @@ public class Oefening2 {
     }
 
 
-    public static int trySolveSubExpression(String[] input){
+    public static String trySolveSubExpression(String[] input){
         try{
         int left = Integer.parseInt(input[0]);
         int right =Integer.parseInt(input[2]);
-            if (input[1].equals("+")) { return left + right;}
-            if (input[1].equals("-")) { return left - right;}
-            if (input[1].equals("*")) { return left * right;}
-            if (input[1].equals("/")) { return left / right;}
-            return 0;
+            if (input[1].equals("+")) { return Integer.toString(left + right);}
+            if (input[1].equals("-")) { return Integer.toString(left - right);}
+            if (input[1].equals("*")) { return Integer.toString(left * right);}
+            if (input[1].equals("/")) { return Integer.toString(left / right);}
+            return "Error";
         }
         catch(Exception e){
-            return 0;
+            return "Error";
         }
     }
 }
